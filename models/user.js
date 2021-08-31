@@ -8,9 +8,6 @@ module.exports = function (app, mongoose) {
         },
         password: {
             type: String,
-            minlength: 8,
-            maxlength: 16,
-            trim: true,
             required: true
         },
         fullName: {
@@ -21,21 +18,15 @@ module.exports = function (app, mongoose) {
             type: Date,
             required: true
         },
-        role: {
-            type: String,
-            trim: true,
-            default: 'user'
-        },
         phoneNumber: {
             type: String,
             require: true
         },
-        isActive: {
-            type: Boolean,
+        role: {
+            type: String,
             trim: true,
-            default: false
-        },
-
+            default: 'user'
+        }
     }, { timestamps: true });
     app.db.model('User', UserSchema);
 }

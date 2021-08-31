@@ -5,10 +5,10 @@ module.exports = function (app) {
     const router = Router();
     
     // Login API Route
-    router.post("/login", LoginController);
+    router.post("/login", app.controllers.LoginController);
 
     // Signup API Route
-    router.post("/signup", SignupController);
+    router.post("/signup", app.controllers.SignupController);
 
-    app.use('auth', router)
+    app.use('/auth', router)
 }

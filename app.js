@@ -16,7 +16,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./config')(app)
 require('./db')(app, mongoose)
-
+require('./models/index')(app, mongoose);
+require("./controllers/index")(app, mongoose);
 require("./routes/index")(app);
 
 module.exports = app;
