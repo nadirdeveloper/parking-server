@@ -1,0 +1,21 @@
+{
+  "name": "parking-server",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadirdeveloper/parking-server.git"
+  },
+  "author": "Nadir Ali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nadirdeveloper/parking-server/issues"
+  },
+  "homepage": "https://github.com/nadirdeveloper/parking-server#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
