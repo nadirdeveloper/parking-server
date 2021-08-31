@@ -10,7 +10,7 @@
  
  // Start Server by Listening at Port
  server.listen(port,()=>{
-   console.log(`🚀 Server is running on port ${port}`);
+   console.log(`Server is running on port ${port}`);
    
  });
  // Handle On Server Error Event
