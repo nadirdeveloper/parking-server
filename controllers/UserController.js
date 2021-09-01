@@ -20,7 +20,9 @@ module.exports = function (app, mongoose) {
             if (!pwdMatches) {
                 return res.json({ success: false, message: "Sorry, But Password Doesn't Match" });
             }
+            const currentUser = JSON.parse(JSON.stringify(foundUser));
             const token = await CreateToken(foundUser, app.get('token-secret'));
+            currentUser["token"] = token;
             res.json({ success: true, message: "Successfully Logged In User", token })
         } catch (error) {
             if (error) {
@@ -53,8 +55,9 @@ module.exports = function (app, mongoose) {
                 phoneNumber
             });
             const addedUser = await user.save();
-            const newUser = JSON.parse(JSON.stringify(addedUser))
+            const newUser = JSON.parse(JSON.stringify(addedUser));
             const token = await CreateToken(newUser, app.get('token-secret'));
+            newUser["token"] = token;
             res.json({ success: true, message: "Successfully Create User", token })
         } catch (error) {
             if (error) {

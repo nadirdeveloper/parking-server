@@ -1,5 +1,3 @@
-const { SignupController } = require('../controllers/UserController');
-
 module.exports = function (app) {
     const { Router } = require('express');
     const router = Router();
