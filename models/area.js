@@ -21,6 +21,10 @@ module.exports = function (app, mongoose) {
                 trim: true,
                 required: true,
             },
+            createdBy: {
+                type: String,
+                required: true
+            }
         },
         { timestamps: true }
     );

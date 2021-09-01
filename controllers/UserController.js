@@ -5,6 +5,7 @@ module.exports = function (app, mongoose) {
     const { User, Token } = app.db.models;
     const bcrypt = require("bcryptjs");
     const saltRounds = 10;
+    // Login Controller to handle Loging Route
     const LoginController = async (req, res) => {
         try {
             const validation = LoginSchema.validate(req.body);
@@ -31,7 +32,8 @@ module.exports = function (app, mongoose) {
             }
         }
     }
-
+    
+    // Signup Controller to handle Signup Route
     const SignupController = async (req, res) => {
         console.log("body", req.body);
         try {
@@ -39,7 +41,7 @@ module.exports = function (app, mongoose) {
             if (validation.error) {
                 throw new Error(validation.error);
             }
-            const { fullName, email, password, dob, role, phoneNumber } = req.body;
+            const { fullName, email, password, dob, phoneNumber } = req.body;
             const existingUser = await User.findOne({ email: email });
             if (existingUser) {
                 return res.json({ success: false, message: 'This Email Adress is Already Registered' });
@@ -51,7 +53,7 @@ module.exports = function (app, mongoose) {
                 email,
                 password: hashedPassword,
                 dob,
-                role,
+                role: 'user',
                 phoneNumber
             });
             const addedUser = await user.save();
@@ -66,6 +68,8 @@ module.exports = function (app, mongoose) {
             }
         }
     }
+
+    // Configuring User Controllers to app
     app.controllers.LoginController = LoginController;
     app.controllers.SignupController = SignupController
 }

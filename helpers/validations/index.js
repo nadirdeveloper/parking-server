@@ -1,3 +1,4 @@
 module.exports = {
-    UserValidator: require('./user')
+    UserValidator: require('./user'),
+    AdminValidator: require('./admin')
 }

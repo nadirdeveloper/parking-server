@@ -1,5 +1,5 @@
 module.exports = function (app, mongoose) {
-    const { Router } = require('mongoose');
+    const { Router } = require('express');
     const router = Router();
     // Get All Statistics For Admin Dashboard
     router.post("/dashboard", app.controllers.DashboardController);

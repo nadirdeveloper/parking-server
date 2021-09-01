@@ -32,7 +32,7 @@ module.exports = function (app, mongoose) {
             },
             isBooked: {
                 type: Boolean,
-            },
+            }
         },
         { timestamps: true }
     );
