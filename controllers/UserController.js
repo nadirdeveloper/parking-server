@@ -16,7 +16,7 @@ module.exports = function (app, mongoose) {
             if (!foundUser) {
                 return res.json({ success: false, message: "No User Found With This Email Address" });
             }
-            let pwdMatches = bcrypt.compareSync(password, foundUser.password);
+            const pwdMatches = bcrypt.compareSync(password, foundUser.password);
             if (!pwdMatches) {
                 return res.json({ success: false, message: "Sorry, But Password Doesn't Match" });
             }
@@ -38,6 +38,10 @@ module.exports = function (app, mongoose) {
                 throw new Error(validation.error);
             }
             const { fullName, email, password, dob, role, phoneNumber } = req.body;
+            const existingUser = await User.findOne({ email: email });
+            if (existingUser) {
+                return res.json({ success: false, message: 'This Email Adress is Already Registered' });
+            }
             const bcrypySalt = await bcrypt.genSalt(saltRounds);
             const hashedPassword = await bcrypt.hashSync(password, bcrypySalt);
             const user = new User({
