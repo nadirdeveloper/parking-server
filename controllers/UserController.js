@@ -1,4 +1,5 @@
 const { CreateToken } = require('../helpers/tokenMangemnt');
+const { GenerateUniqueId } = require('../helpers/uniqueId');
 
 module.exports = function (app, mongoose) {
     const { Validator: { UserValidator: { SignupSchema, LoginSchema } } } = require('../helpers')
@@ -24,7 +25,8 @@ module.exports = function (app, mongoose) {
             const currentUser = JSON.parse(JSON.stringify(foundUser));
             const token = await CreateToken(foundUser, app.get('token-secret'));
             currentUser["token"] = token;
-            res.json({ success: true, message: "Successfully Logged In User", token })
+            delete currentUser["password"];
+            res.json({ success: true, message: "Successfully Logged In User", user: currentUser })
         } catch (error) {
             if (error) {
                 console.log(error)
@@ -32,7 +34,7 @@ module.exports = function (app, mongoose) {
             }
         }
     }
-    
+
     // Signup Controller to handle Signup Route
     const SignupController = async (req, res) => {
         console.log("body", req.body);
@@ -49,6 +51,7 @@ module.exports = function (app, mongoose) {
             const bcrypySalt = await bcrypt.genSalt(saltRounds);
             const hashedPassword = await bcrypt.hashSync(password, bcrypySalt);
             const user = new User({
+                userId: GenerateUniqueId(),
                 fullName,
                 email,
                 password: hashedPassword,
@@ -64,7 +67,7 @@ module.exports = function (app, mongoose) {
         } catch (error) {
             if (error) {
                 console.log(error)
-                res.json({ success: false, message: error.message })
+                res.json({ success: false, message: error.message, user: newUser })
             }
         }
     }

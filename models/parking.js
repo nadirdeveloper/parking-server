@@ -4,22 +4,17 @@ module.exports = function (app, mongoose) {
         {
             id: {
                 type: String,
-                trim: true,
                 required: true,
                 unique: true,
-                lowercase: true,
             },
             name: {
                 type: String,
-                trim: true,
                 required: true,
                 max: 64,
             },
             areaId: {
                 type: String,
-                trim: true,
                 required: true,
-                lowercase: true,
             },
             startTime: {
                 type: String,

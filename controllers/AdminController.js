@@ -38,7 +38,6 @@ module.exports = function (app, mongoose) {
                     console.log("Error Saving The Record ", err);
                     return res.json({ success: false, message: 'Error Saving The Record', err })
                 }
-                const parkingSlots = []
                 for (let i = 0; i < parkingSpace; i++) {
                     let newParkingSlot = {
                         id: GenerateUniqueId(),
@@ -49,17 +48,18 @@ module.exports = function (app, mongoose) {
                         lastUser: null,
                         isBooked: false
                     };
-                    parkingSlots.push(newParkingSlot);
+                    let newParkingSave = new Parking(newParkingSlot)
+                    newParkingSave.save();
                 };
-                console.log(parkingSlots);
-                Parking.insertMany([...parkingSlots]).then(() => {
-                    res.json({ success: true, message: 'Successfully Created Area With Slots',newArea })
-                }).catch((error) => {
-                    if (error) {
-                        console.log(error)
-                        res.json({ success: false, message: 'Error Creating Slots for Parking' });
-                    }
-                })
+                // Parking.insertMany([...parkingSlots]).then(() => {
+                //     
+                // }).catch((error) => {
+                //     if (error) {
+                //         console.log(error)
+                //         res.json({ success: false, message: 'Error Creating Slots for Parking' });
+                //     }
+                // })
+                res.json({ success: true, message: 'Successfully Created Area With Slots',newArea })
             })
         } catch (error) {
             if (error) {

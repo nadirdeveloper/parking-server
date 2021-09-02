@@ -3,10 +3,10 @@ module.exports = function (app) {
     const router = Router();
 
     // Get All Areas For Parking
-    router.post("/getParkingAreas", app.controllers.GetParkingController);
+    router.get("/getParkingAreas", app.controllers.GetParkingAreas);
 
     // Get All Slots For Parking at Area
-    router.post("/getAllSlots", app.controllers.GetSlotsController)
+    router.get("/getAllSlots", app.controllers.GetParkingSlots)
     
     app.use("/parking", router)
 }
