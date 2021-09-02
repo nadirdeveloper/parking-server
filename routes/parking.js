@@ -8,5 +8,7 @@ module.exports = function (app) {
     // Get All Slots For Parking at Area
     router.get("/getAllSlots", app.controllers.GetParkingSlots)
     
+    // 
+    
     app.use("/parking", router)
 }

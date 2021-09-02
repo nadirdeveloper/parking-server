@@ -63,11 +63,11 @@ module.exports = function (app, mongoose) {
             const newUser = JSON.parse(JSON.stringify(addedUser));
             const token = await CreateToken(newUser, app.get('token-secret'));
             newUser["token"] = token;
-            res.json({ success: true, message: "Successfully Create User", token })
+            res.json({ success: true, message: "Successfully Create User", user: newUser })
         } catch (error) {
             if (error) {
                 console.log(error)
-                res.json({ success: false, message: error.message, user: newUser })
+                res.json({ success: false, message: error.message  })
             }
         }
     }
