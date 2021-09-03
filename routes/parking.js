@@ -6,9 +6,10 @@ module.exports = function (app) {
     router.get("/getParkingAreas", app.controllers.GetParkingAreas);
 
     // Get All Slots For Parking at Area
-    router.get("/getAllSlots", app.controllers.GetParkingSlots)
+    router.post("/getAllSlots", app.controllers.GetParkingSlots)
     
-    // 
+    // Book Parking Slot
+    router.post("/bookParkingSlot", app.controllers.BookParkingSlot);
     
     app.use("/parking", router)
 }

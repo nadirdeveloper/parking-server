@@ -6,8 +6,8 @@ module.exports = function (app, mongoose) {
     router.post("/addUser", app.controllers.AddUserController);
     router.post("/createArea", app.controllers.CreateAreaController);
     router.get("/getAllAreas", app.controllers.GetAreaController);
-    router.get("/getAllBookings", app.controllers.GetAreaController);
-    router.get("/getAllParkings", app.controllers.GetAreaController);
+    router.get("/getAllBookings", app.controllers.GetBookingController);
+    router.get("/getAllParkings", app.controllers.GetParkingController);
     router.get("/getAllFeedbacks", app.controllers.GetAreaController);
     router.get("/getAllUsers", app.controllers.GetUsersController);
     router.delete("/deleteUser", app.controllers.DeleteUserController)

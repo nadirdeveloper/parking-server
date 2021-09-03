@@ -13,14 +13,17 @@ const bookingSchema = new mongoose.Schema(
     parkingId: {
       type: String,
     },
+    areaId: {
+      type: String,
+    },
     email: {
       type: String,
     },
     startTime: {
-      type: String,
+      type: Number,
     },
     endTime: {
-      type: String,
+      type: Number,
     },
     isBooking: Boolean,
   },

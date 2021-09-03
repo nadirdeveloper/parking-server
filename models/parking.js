@@ -16,18 +16,6 @@ module.exports = function (app, mongoose) {
                 type: String,
                 required: true,
             },
-            startTime: {
-                type: String,
-            },
-            endTime: {
-                type: String,
-            },
-            lastUser: {
-                type: String,
-            },
-            isBooked: {
-                type: Boolean,
-            }
         },
         { timestamps: true }
     );

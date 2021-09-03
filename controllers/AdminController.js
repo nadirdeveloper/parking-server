@@ -3,7 +3,7 @@ const { generateUniqueId } = require('../helpers/uniqueId/generateUniqueId');
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 module.exports = function (app, mongoose) {
-    const { Area, Parking, User } = app.db.models;
+    const { Area, Parking, User, Booking, Feedback } = app.db.models;
     const { Validator: { AdminValidator: { AreaSchema } } } = require('../helpers');
 
     // Dashboard Controller for Dashboard Route
@@ -55,22 +55,10 @@ module.exports = function (app, mongoose) {
                         id: GenerateUniqueId(),
                         name: "Slot " + (i + 1),
                         areaId: areaId,
-                        startTime: null,
-                        endTime: null,
-                        lastUser: null,
-                        isBooked: false
                     };
                     let newParkingSave = new Parking(newParkingSlot)
                     newParkingSave.save();
                 };
-                // Parking.insertMany([...parkingSlots]).then(() => {
-                //     
-                // }).catch((error) => {
-                //     if (error) {
-                //         console.log(error)
-                //         res.json({ success: false, message: 'Error Creating Slots for Parking' });
-                //     }
-                // })
                 res.json({ success: true, message: 'Successfully Created Area With Slots', newArea })
             })
         } catch (error) {
@@ -90,6 +78,43 @@ module.exports = function (app, mongoose) {
             }
         }
     }
+    // Get All Booking Controller for Admin Route
+    const GetBookingController = async (req, res) => {
+        try {
+            const allBookings = await Booking.find();
+            res.json({ success: true, allBookings, message: 'Successfully Found All Bookings' })
+        } catch (error) {
+            if (error) {
+                res.json({ success: false, message: error.message })
+            }
+        }
+    }
+
+    // Get All Parkings Controller for Admin Route
+    const GetParkingController = async (req, res) => {
+        try {
+            const allParking = await Parking.find();
+            res.json({ success: true, allParking, message: 'Successfully Found All Parkings' })
+        } catch (error) {
+            if (error) {
+                res.json({ success: false, message: error.message })
+            }
+        }
+    }
+
+     // Get All Feedbacks Controller for Admin Route
+     const GetFeedbackController = async (req, res) => {
+        try {
+            const allFeedbacks = await Feedback.find();
+            res.json({ success: true, allFeedbacks, message: 'Successfully Found All Feedbacks' })
+        } catch (error) {
+            if (error) {
+                res.json({ success: false, message: error.message })
+            }
+        }
+    }
+
+    // Get All Users Controller for Admin Route
     const GetUsersController = async (req, res) => {
         try {
             const allUsers = await User.find({}, { password: 0 });
@@ -133,9 +158,9 @@ module.exports = function (app, mongoose) {
             const { userId } = req.body;
             console.log(userId)
             let deleteUser = await User.deleteOne({ userId: userId });
-            if(deleteUser.deletedCount === 1){
+            if (deleteUser.deletedCount === 1) {
                 res.json({ success: true, message: 'Successfully Deleted User' })
-            }else{
+            } else {
                 res.json({ success: true, message: 'Sorry No User Found' })
             }
         } catch (error) {
@@ -148,6 +173,9 @@ module.exports = function (app, mongoose) {
     app.controllers.DashboardController = DashboardController;
     app.controllers.CreateAreaController = CreateAreaController;
     app.controllers.GetAreaController = GetAreaController;
+    app.controllers.GetBookingController = GetBookingController;
+    app.controllers.GetParkingController = GetParkingController;
+    app.controllers.GetFeedbackController = GetFeedbackController;
     app.controllers.GetUsersController = GetUsersController;
     app.controllers.AddUserController = AddUserController;
     app.controllers.DeleteUserController = DeleteUserController;
