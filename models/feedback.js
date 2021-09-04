@@ -1,10 +1,12 @@
 module.exports = function (app, mongoose) {
     const { Schema } = mongoose;
     const UserSchema = new Schema({
+        id:{
+            type: Schema.Types.ObjectId,
+        },
         email: {
             type: String,
             required: true,
-            unique: true
         },
         userId: {
             type: String,

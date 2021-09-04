@@ -4,11 +4,7 @@ module.exports = function(app,mongoose){
 const bookingSchema = new mongoose.Schema(
   {
     id: {
-      type: String,
-      trim: true,
-      required: true,
-      unique: true,
-      lowercase: true,
+      type: Schema.Types.ObjectId,
     },
     parkingId: {
       type: String,
@@ -16,7 +12,7 @@ const bookingSchema = new mongoose.Schema(
     areaId: {
       type: String,
     },
-    email: {
+    userId: {
       type: String,
     },
     startTime: {

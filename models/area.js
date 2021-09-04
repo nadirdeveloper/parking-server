@@ -3,11 +3,7 @@ module.exports = function (app, mongoose) {
     const areaSchema = new Schema(
         {
             id: {
-                type: String,
-                trim: true,
-                required: true,
-                unique: true,
-                lowercase: true,
+                type: Schema.Types.ObjectId,
             },
             name: {
                 type: String,

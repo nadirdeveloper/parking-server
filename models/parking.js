@@ -3,9 +3,7 @@ module.exports = function (app, mongoose) {
     const parkingSchema = Schema(
         {
             id: {
-                type: String,
-                required: true,
-                unique: true,
+                type: Schema.Types.ObjectId,
             },
             name: {
                 type: String,
