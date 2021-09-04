@@ -1,4 +1,5 @@
 const { adminFunc } = require('../middlewares/admin');
+const { authFunc } = require('../middlewares/auth');
 
 module.exports = function (app, mongoose) {
     const { Router } = require('express');
@@ -10,7 +11,7 @@ module.exports = function (app, mongoose) {
     // Create Parking Area
     router.post("/createArea", adminFunc, app.controllers.CreateAreaController);
     // Get All Parking Areas
-    router.get("/getAllAreas", adminFunc, app.controllers.GetAreaController);
+    router.get("/getAllAreas", authFunc, app.controllers.GetAreaController);
     // Get All Bookings
     router.get("/getAllBookings", adminFunc, app.controllers.GetBookingController);
     router.get("/getAllParkings", adminFunc, app.controllers.GetParkingController);
