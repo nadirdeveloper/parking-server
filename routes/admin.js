@@ -1,21 +1,27 @@
+const { adminFunc } = require('../middlewares/admin');
+
 module.exports = function (app, mongoose) {
     const { Router } = require('express');
     const router = Router();
     // Get All Statistics For Admin Dashboard
-    router.get("/dashboard", app.controllers.DashboardController);
-    router.post("/addUser", app.controllers.AddUserController);
-    router.post("/createArea", app.controllers.CreateAreaController);
-    router.get("/getAllAreas", app.controllers.GetAreaController);
-    router.get("/getAllBookings", app.controllers.GetBookingController);
-    router.get("/getAllParkings", app.controllers.GetParkingController);
-    router.get("/getAllFeedbacks", app.controllers.GetFeedbackController);
-    router.get("/getAllUsers", app.controllers.GetUsersController);
-    router.delete("/deleteUser", app.controllers.DeleteUserController);
-    router.delete("/deleteArea", app.controllers.DeleteAreaController);
-    router.post("/deleteBooking", app.controllers.DeleteBookingController);
-    router.post("/deleteParking", app.controllers.DeleteParkingController);
-    router.post("/cancelBooking", app.controllers.CancelBookingController);
-    router.post("/changeUserRole", app.controllers.ChangeRoleController);
-    router.post("/replyFeedback", app.controllers.ReplyFeedbackController);
+    router.get("/dashboard", adminFunc, app.controllers.DashboardController);
+    // Add User To Database
+    router.post("/addUser", adminFunc, app.controllers.AddUserController);
+    // Create Parking Area
+    router.post("/createArea", adminFunc, app.controllers.CreateAreaController);
+    // Get All Parking Areas
+    router.get("/getAllAreas", adminFunc, app.controllers.GetAreaController);
+    // Get All Bookings
+    router.get("/getAllBookings", adminFunc, app.controllers.GetBookingController);
+    router.get("/getAllParkings", adminFunc, app.controllers.GetParkingController);
+    router.get("/getAllFeedbacks", adminFunc, app.controllers.GetFeedbackController);
+    router.get("/getAllUsers", adminFunc, app.controllers.GetUsersController);
+    router.delete("/deleteUser", adminFunc, app.controllers.DeleteUserController);
+    router.delete("/deleteArea", adminFunc, app.controllers.DeleteAreaController);
+    router.post("/deleteBooking", adminFunc, app.controllers.DeleteBookingController);
+    router.post("/deleteParking", adminFunc, app.controllers.DeleteParkingController);
+    router.post("/cancelBooking", adminFunc, app.controllers.CancelBookingController);
+    router.post("/changeUserRole", adminFunc, app.controllers.ChangeRoleController);
+    router.post("/replyFeedback", adminFunc, app.controllers.ReplyFeedbackController);
     app.use('/admin', router);
 }
