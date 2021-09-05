@@ -246,7 +246,10 @@ module.exports = function (app, mongoose) {
                 </table>
                 </body>`
         };
-
+        console.log({
+          user: process.env.SENDER_EMAIL,
+          pass: process.env.SENDER_PASSWORD
+        })
         var transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
