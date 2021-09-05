@@ -204,8 +204,8 @@ module.exports = function (app, mongoose) {
                                   <td>${bookingId}</td>
                                   <td>${parkingArea} Gallons</td>
                                   <td>${slotName}</td>
-                                  <td>${new Date(startTime).toLocaleString()}</td>
-                                  <td>${new Date(endTime).toLocaleString()}</td>
+                                  <td>${new Date(startTime).toUTCString()}</td>
+                                  <td>${new Date(endTime).toUTCString()}</td>
                               </tr>
                             </table>
                           </td>
